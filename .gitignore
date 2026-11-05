@@ -176,6 +176,9 @@ cython_debug/
 .DS_Store
 
 1_foundations/emails.txt
+1_foundations/twin/Akhil_Resume_20-01-2026.pdf
+1_foundations/twin/Profile.pdf
+1_foundations/twin/summary.txt
 
 2_openai/output/
 
