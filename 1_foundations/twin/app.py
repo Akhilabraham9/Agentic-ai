@@ -7,24 +7,23 @@ import gradio as gr
 
 load_dotenv(override = True)
 openai = OpenAI()
-system = {
+
+MODEL_NAME = "gpt-5.4-mini"
+system = [{
     "role": "system", "content": TWIN_SYSTEM_PROMPT
-}
+}]
 
 
 def chat(message, history):
-    messages = {"role": "system", "content": TWIN_SYSTEM_PROMPT} + history + {"role": "user", "content": message}
-    response = openai.chat.completions.create(
-        model = "gpt-5.4-mini", messages = messages
-    )
+    messages = system + history + [{"role": "user", "content": message}]
+    response = openai.chat.completions.create(model=MODEL_NAME, messages=messages, tools=tools)
     while response.choices[0].finish_reason == "tool_calls":
-        tool_calls = response.choices[0].message
+        message = response.choices[0].message
+        tool_calls = message.tool_calls
         results = handle_tool_calls(tool_calls)
         messages.append(message)
         messages.extend(results)
-        response = openai.chat.completions.create(
-            model = "gpt-5.4-mini", messages = messages, tools = tools
-        )
+        response = openai.chat.completions.create(model=MODEL_NAME, messages=messages, tools=tools)
     return response.choices[0].message.content
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 from pypdf import PdfReader
 
-reader = PdfReader("Profile.pdf")\
+reader = PdfReader("1_foundations/twin/Profile.pdf")
 
 linkedin = ""
 for page in reader.pages:
@@ -8,7 +8,7 @@ for page in reader.pages:
     if text:
         linkedin += text
 
-with open("summary.text") as f:
+with open("1_foundations/twin/summary.txt", "r", encoding="utf-8") as f:
     summary = f.read()
 
 TWIN_SYSTEM_PROMPT = f"""
@@ -46,4 +46,3 @@ If you don't know the answer, use your tool to record the question, and then tel
 
 Use styling (in markdown, no code blocks) to make the response more engaging and easy to read.
 """.strip()
-
