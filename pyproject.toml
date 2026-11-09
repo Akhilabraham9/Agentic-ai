@@ -23,6 +23,7 @@ dependencies = [
     "massive>=2.8.0",
     "openai>=2.34.0",
     "openai-agents[viz]>=0.15.1",
+    "pip>=26.3",
     "plotly>=6.8.0",
     "pydantic>=2.13.3",
     "pydantic-ai-slim[mcp,openai]>=1.107.0",
